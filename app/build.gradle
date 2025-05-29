@@ -24,10 +24,10 @@ ext {
     javaTestDir = "../lazysodium-java/src/test/java/com/goterl/lazysodium"
 
     jUnitVersion = "4.13.2"
-    androidXJUnitVersion = "1.1.4"
-    androidXEspressoVersion = "3.5.0"
-    androidXTestingCoreVersion = "2.1.0"
-    androidXTestCoreVersion = "1.5.0"
+    androidXJUnitVersion = "1.2.1"
+    androidXEspressoVersion = "3.6.1"
+    androidXTestingCoreVersion = "2.2.0"
+    androidXTestCoreVersion = "1.6.1"
     kotlinCoroutinesVersion = "1.6.4"
 }
 
@@ -35,11 +35,10 @@ group project.ext.groupId
 version = project.ext.version
 
 android {
-    compileSdkVersion 33
-    buildToolsVersion "30.0.3"
+    compileSdkVersion 35
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 33
+        targetSdkVersion 35
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -144,7 +143,7 @@ tasks.withType(Test) {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'net.java.dev.jna:jna:5.12.1@aar'
+    implementation 'net.java.dev.jna:jna:5.14.0@aar'
 
     // Test libs
     testImplementation "junit:junit:$jUnitVersion"
