@@ -36,7 +36,7 @@ public class CreditsFragment extends BaseFragment {
         adapter = new MultiAdapter(getActivity(), getListOfCredits(), true);
         adapter.setClickListener((view, position) -> {
             if (position == 0) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/terl/lazysodium-android"));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/mormegil-cz/lazysodium-android"));
                 startActivity(browserIntent);
             }
             if (position == 1) {
