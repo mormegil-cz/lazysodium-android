@@ -21,7 +21,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'com.android.tools.build:gradle:8.10.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -33,19 +33,5 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven {
-            url = "https://repository.mulesoft.org/nexus/content/repositories/public/"
-        }
-        jcenter {
-            content {
-                // https://youtrack.jetbrains.com/issue/IDEA-261387
-                includeModule("org.jetbrains.trove4j", "trove4j")
-            }
-        }
     }
 }
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
-
