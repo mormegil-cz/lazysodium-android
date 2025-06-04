@@ -13,6 +13,7 @@
     <ignore regexp="NativeUtils\.java" />
     <ignore regexp="SodiumJava\.java" />
     <ignore regexp="LazySodiumJava\.java" />
+    <ignore regexp="Base64Java\.java" />
   </issue>
 
 </lint>

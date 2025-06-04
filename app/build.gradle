@@ -28,6 +28,7 @@ ext {
     androidXEspressoVersion = "3.6.1"
     androidXTestingCoreVersion = "2.2.0"
     androidXTestCoreVersion = "1.6.1"
+    androidXTestRunnerVersion = "1.6.2"
     kotlinCoroutinesVersion = "1.6.4"
 }
 
@@ -63,6 +64,7 @@ android {
             exclude "com/goterl/lazysodium/utils/LibraryLoader.java"
             exclude "com/goterl/lazysodium/SodiumJava.java"
             exclude "com/goterl/lazysodium/LazySodiumJava.java"
+            exclude "com/goterl/lazysodium/utils/Base64Java.java"
         }
     }
 
@@ -143,20 +145,20 @@ tasks.withType(Test) {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'net.java.dev.jna:jna:5.14.0@aar'
+    implementation 'net.java.dev.jna:jna:5.17.0@aar'
 
     // Test libs
     testImplementation "junit:junit:$jUnitVersion"
     testImplementation "androidx.arch.core:core-testing:$androidXTestingCoreVersion"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinCoroutinesVersion"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion"
-    testImplementation "androidx.test:runner:$androidXTestCoreVersion"
+    testImplementation "androidx.test:runner:$androidXTestRunnerVersion"
 
     androidTestImplementation "androidx.test:core:$androidXTestCoreVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidXJUnitVersion"
     androidTestImplementation "androidx.test:rules:$androidXTestCoreVersion"
-    androidTestImplementation "androidx.test:runner:$androidXTestCoreVersion"
-    androidTestUtil "androidx.test:orchestrator:1.4.2"
+    androidTestImplementation "androidx.test:runner:$androidXTestRunnerVersion"
+    androidTestUtil "androidx.test:orchestrator:1.5.1"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidXEspressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$androidXEspressoVersion"
     androidTestImplementation "androidx.arch.core:core-testing:$androidXTestingCoreVersion"
