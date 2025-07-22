@@ -5,21 +5,19 @@
  * License, v2.0. If a copy of the MPL was not distributed with this
  * file, you can obtain one at http://mozilla.org/MPL/2.0/.
  */
-
-import java.security.Signature
-
 plugins {
     id 'com.android.library'
-    id 'maven-publish'
+    id 'com.vanniktech.maven.publish' version '0.34.0'
     id 'signing'
 }
 
 ext {
     artifactId = "lazysodium-android"
     groupId = "cz.mormegil"
-    version = '6.0.0'
+    version = '6.0.0-SNAPSHOT'
     description = "Lazysodium (Android) makes it effortless for Android " +
-            "developers to get started with Libsodium's cryptography."
+            "developers to get started with Libsodium's cryptography. " +
+            "(fork of the original library)"
     androidTestDir = "src/androidTest/java/com/goterl/lazysodium"
     javaTestDir = "../lazysodium-java/src/test/java/com/goterl/lazysodium"
 
@@ -87,13 +85,6 @@ android {
     lint {
         lintConfig file('lint.xml')
     }
-
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-            withJavadocJar()
-        }
-    }
 }
 
 void loadProps() {
@@ -112,27 +103,6 @@ void loadProps() {
 }
 
 loadProps()
-
-// Return an empty string if a property
-// cannot be found
-String getProp(String propName) {
-    if (ext.hasProperty(propName) != null) {
-        return ext[propName]
-    } else {
-        ""
-    }
-}
-
-String getSonatypeUserName() {
-    return findProperty("ossrhUsername")
-}
-
-String getSonatypePassword() {
-    return findProperty("ossrhPassword")
-}
-
-// Don't export documentation
-tasks.withType(Javadoc).all { enabled = false }
 
 tasks.withType(Test) {
     testLogging {
@@ -164,10 +134,6 @@ dependencies {
     androidTestImplementation "androidx.arch.core:core-testing:$androidXTestingCoreVersion"
 }
 
-Signature.metaClass.getToSignArtifact = { ->
-    return (delegate as Signature).source
-}
-
 // Tasks
 signing {
     // This will use the GPG Agent
@@ -176,91 +142,37 @@ signing {
     sign publishing.publications
 }
 
-task signPom(type: Sign) {
-    sign project.file("$buildDir/publications/mavenJava/pom-default.xml")
+mavenPublishing {
+    publishToMavenCentral()
+    signAllPublications()
 
-    // The signing plugin does not seem to notice
-    // it when the publications folder with the
-    // signature has been deleted. So we always
-    // create a new signature
-    outputs.upToDateWhen { false }
-}
+    coordinates(project.ext.groupId, project.ext.artifactId, project.ext.version)
 
-Closure createPomClosure = {
-    def root = asNode()
-    root.appendNode('description', project.ext.description)
-    root.appendNode('name', project.ext.artifactId)
-    root.appendNode('url', 'https://github.com/mormegil-cz/lazysodium-android')
-
-    def scm = root.appendNode('scm')
-    scm.appendNode("connection", "scm:git:git://github.com/mormegil-cz/lazysodium-android.git")
-    scm.appendNode("developerConnection", "scm:git:ssh://github.com/mormegil-cz/lazysodium-android")
-    scm.appendNode("url", "http://github.com/mormegil-cz/lazysodium-android")
-
-    def license = root.appendNode('licenses').appendNode('license')
-    license.appendNode('name', 'Mozilla Public License, Version 2.0')
-    license.appendNode('url', 'http://www.mozilla.org/MPL/2.0/index.txt')
-    license.appendNode('distribution', 'repo')
-
-    def developers = root.appendNode('developers')
-    def developer1 = developers.appendNode('developer')
-    developer1.appendNode('name', 'Terl Tech Ltd')
-    developer1.appendNode('email', 'hello@terl.co')
-    def developer2 = developers.appendNode('developer')
-    developer2.appendNode('name', 'mormegil-cz')
-    developer2.appendNode('email', 'mormegil@centrum.cz')
-
-    def dependenciesNode = root.appendNode('dependencies')
-    configurations.implementation.allDependencies.each {
-        if (it.group != null && (it.name != null || "unspecified".equals(it.name)) && it.version != null) {
-            def dependencyNode = dependenciesNode.appendNode('dependency')
-            dependencyNode.appendNode('groupId', it.group)
-            dependencyNode.appendNode('artifactId', it.name)
-            dependencyNode.appendNode('version', it.version)
-        }
-    }
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            snapshot(MavenPublication) {
-                groupId project.ext.groupId
-                artifactId project.ext.artifactId
-                version project.ext.version + "-SNAPSHOT"
-
-                artifact bundleReleaseAar
-
-                pom.withXml createPomClosure
-            }
-            release(MavenPublication) {
-                groupId project.ext.groupId
-                artifactId project.ext.artifactId
-                version project.ext.version
-
-                artifact bundleReleaseAar
-
-                pom.withXml createPomClosure
+    pom {
+        name = project.ext.artifactId
+        description = project.ext.description
+        url = 'https://github.com/mormegil-cz/lazysodium-android'
+        licenses {
+            license {
+                name = 'Mozilla Public License, Version 2.0'
+                url = 'https://www.mozilla.org/MPL/2.0/index.txt'
+                distribution = 'repo'
             }
         }
-
-        repositories {
-            maven {
-                name = "release"
-                url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-                credentials {
-                    username getSonatypeUserName()
-                    password getSonatypePassword()
-                }
+        developers {
+            developer {
+                name = 'Terl Tech Ltd'
+                email = 'hello@terl.co'
             }
-            maven {
-                name = "snapshot"
-                url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-                credentials {
-                    username getSonatypeUserName()
-                    password getSonatypePassword()
-                }
+            developer {
+                name = 'mormegil-cz'
+                email = 'mormegil@centrum.cz'
             }
+        }
+        scm {
+            connection = 'scm:git:git://github.com/mormegil-cz/lazysodium-android.git'
+            developerConnection = 'scm:git:ssh://github.com/mormegil-cz/lazysodium-android'
+            url = 'https://github.com/mormegil-cz/lazysodium-android'
         }
     }
 }
