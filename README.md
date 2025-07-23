@@ -38,14 +38,14 @@ repositories {
 
 // Project level dependencies section
 dependencies {
-    implementation "com.goterl:lazysodium-android:VERSION_NUMBER@aar"
+    implementation "cz.mormegil:lazysodium-android:VERSION_NUMBER@aar"
     implementation "net.java.dev.jna:jna:5.8.0@aar"
 }
 ```
 
 Substitute `VERSION_NUMBER` for the version in this box:
 
-![Maven Central](https://img.shields.io/maven-central/v/com.goterl/lazysodium-android?color=%23fff&label=Maven%20Central)
+![Maven Central](https://img.shields.io/maven-central/v/cz.mormegil/lazysodium-android?color=%23fff&label=Maven%20Central)
 
 ## Documentation
 
@@ -59,7 +59,7 @@ You can preview some of the features in our free Lazysodium app available on Goo
 
 
 ## Lazysodium for Java
-We also have a Java implementation available at [Lazysodium for Java](https://github.com/terl/lazysodium-java). It has the same API as this library so you can share code easily!
+We also have a Java implementation available at [Lazysodium for Java](https://github.com/mormegil-cz/lazysodium-java). It has the same API as this library so you can share code easily!
 
 
 ---
