@@ -8,7 +8,7 @@ android {
         applicationId "com.goterl.lazysodium.example"
         minSdkVersion 21
         targetSdkVersion 35
-        multiDexEnabled true
+        multiDexEnabled = true
         versionCode 9
         versionName "0.6.0"
     }
@@ -22,7 +22,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    namespace 'com.goterl.lazysodium.example'
+    namespace = 'com.goterl.lazysodium.example'
 }
 
 dependencies {

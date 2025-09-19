@@ -30,7 +30,7 @@ ext {
     kotlinCoroutinesVersion = "1.6.4"
 }
 
-group project.ext.groupId
+group = project.ext.groupId
 version = project.ext.version
 
 android {
@@ -38,7 +38,7 @@ android {
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 35
-        multiDexEnabled true
+        multiDexEnabled = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         // Typically we would need to clear data between every run
@@ -79,11 +79,11 @@ android {
 
     testOptions {
         animationsDisabled = true
-        execution 'ANDROIDX_TEST_ORCHESTRATOR'
+        execution = 'ANDROIDX_TEST_ORCHESTRATOR'
     }
-    namespace 'com.goterl.lazysodium'
+    namespace = 'com.goterl.lazysodium'
     lint {
-        lintConfig file('lint.xml')
+        lintConfig = file('lint.xml')
     }
 }
 
@@ -106,9 +106,9 @@ loadProps()
 
 tasks.withType(Test) {
     testLogging {
-        exceptionFormat "full"
+        exceptionFormat = "full"
         events "started", "skipped", "passed", "failed"
-        showStandardStreams true
+        showStandardStreams = true
     }
 }
 
