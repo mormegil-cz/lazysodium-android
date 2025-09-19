@@ -39,13 +39,15 @@ repositories {
 // Project level dependencies section
 dependencies {
     implementation "cz.mormegil:lazysodium-android:VERSION_NUMBER@aar"
-    implementation "net.java.dev.jna:jna:5.8.0@aar"
+    implementation "net.java.dev.jna:jna:JNA_NUMBER@aar"
 }
 ```
 
 Substitute `VERSION_NUMBER` for the version in this box:
 
 ![Maven Central](https://img.shields.io/maven-central/v/cz.mormegil/lazysodium-android?color=%23fff&label=Maven%20Central)
+
+Substitute `JNA_NUMBER` for the [latest version of JNA](https://github.com/java-native-access/jna/tags).
 
 ## Documentation
 
