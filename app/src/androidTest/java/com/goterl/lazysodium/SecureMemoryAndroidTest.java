@@ -18,7 +18,7 @@ public class SecureMemoryAndroidTest extends BaseTest {
     @Test
     public void memZero() {
         byte[] b = new byte[] { 4, 2, 2, 1 };
-        boolean res = lazySodium.sodiumMemZero(b, b.length);
+        lazySodium.sodiumMemZero(b, b.length);
         TestCase.assertTrue(isZero(b));
     }
 
@@ -38,7 +38,7 @@ public class SecureMemoryAndroidTest extends BaseTest {
 
         byte[] arr = ptr.getByteArray(0, size);
 
-        TestCase.assertEquals(arr.length, size);
+        TestCase.assertEquals(size, arr.length);
     }
 
     @Test

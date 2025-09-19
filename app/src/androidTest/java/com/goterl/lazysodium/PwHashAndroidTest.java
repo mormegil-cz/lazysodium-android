@@ -8,14 +8,15 @@
 
 package com.goterl.lazysodium;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import com.goterl.lazysodium.exceptions.SodiumException;
 import com.goterl.lazysodium.interfaces.PwHash;
 import com.sun.jna.NativeLong;
+
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 public class PwHashAndroidTest extends BaseTest {
 
@@ -49,13 +50,13 @@ public class PwHashAndroidTest extends BaseTest {
     @Test
     public void strMin() throws SodiumException {
 
-        String hash = pwHashLazy.cryptoPwHashStr(
+        String hash = pwHashLazy.cryptoPwHashString(
                 PASSWORD,
                 3,
                 PwHash.MEMLIMIT_MIN
         );
 
-        boolean isCorrect = pwHashLazy.cryptoPwHashStrVerify(hash, PASSWORD);
+        boolean isCorrect = pwHashLazy.cryptoPwHashStringVerify(hash, PASSWORD);
 
         assertTrue("Minimum hashing failed.", isCorrect);
     }

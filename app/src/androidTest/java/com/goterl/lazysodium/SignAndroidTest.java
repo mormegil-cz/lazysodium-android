@@ -8,15 +8,17 @@
 
 package com.goterl.lazysodium;
 
+import static org.junit.Assert.assertNotNull;
+
 import com.goterl.lazysodium.exceptions.SodiumException;
 import com.goterl.lazysodium.interfaces.Sign;
 import com.goterl.lazysodium.utils.Key;
 import com.goterl.lazysodium.utils.KeyPair;
+
 import junit.framework.TestCase;
+
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertNotNull;
 
 
 public class SignAndroidTest extends BaseTest {
@@ -83,7 +85,7 @@ public class SignAndroidTest extends BaseTest {
     @Test
     public void convertEd25519ToCurve25519() throws SodiumException {
         Key key1 = Key.fromHexString("0ae5c84877c9c534ffbb1f854550895a25a9ded6bd6b8a9035f38b9e03a0dfe2");
-        Key key2 = Key.fromHexString("0ae5c84877c9c534ffbb1f854550895a25a9ded6bd6b8a9035f38b9e03a0dfe2");
+        Key key2 = Key.fromHexString("0ae5c84877c9c534ffbb1f854550895a25a9ded6bd6b8a9035f38b9e03a0dfe20ae5c84877c9c534ffbb1f854550895a25a9ded6bd6b8a9035f38b9e03a0dfe2");
         KeyPair ed25519KeyPair = new KeyPair(key1, key2);
 
         KeyPair curve25519KeyPair = lazySodium.convertKeyPairEd25519ToCurve25519(ed25519KeyPair);

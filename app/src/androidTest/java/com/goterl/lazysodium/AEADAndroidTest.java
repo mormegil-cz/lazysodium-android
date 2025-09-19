@@ -69,9 +69,9 @@ public class AEADAndroidTest extends BaseTest {
         byte[] nPub = lazySodium.nonce(AEAD.CHACHA20POLY1305_NPUBBYTES);
 
         DetachedEncrypt detachedEncrypt
-                = lazySodium.encryptDetached(PASSWORD, null, null, nPub, key, AEAD.Method.CHACHA20_POLY1305);
+                = lazySodium.encryptDetached(PASSWORD, null, nPub, key, AEAD.Method.CHACHA20_POLY1305);
 
-        DetachedDecrypt detachedDecrypt = lazySodium.decryptDetached(detachedEncrypt, null, null, nPub, key, AEAD.Method.CHACHA20_POLY1305);
+        DetachedDecrypt detachedDecrypt = lazySodium.decryptDetached(detachedEncrypt, null, nPub, key, AEAD.Method.CHACHA20_POLY1305);
 
         TestCase.assertEquals(detachedDecrypt.getMessageString(), PASSWORD);
     }
@@ -85,9 +85,9 @@ public class AEADAndroidTest extends BaseTest {
         byte[] nPub = lazySodium.nonce(AEAD.CHACHA20POLY1305_IETF_NPUBBYTES);
 
         DetachedEncrypt detachedEncrypt
-                = lazySodium.encryptDetached(PASSWORD, null, null, nPub, key, AEAD.Method.CHACHA20_POLY1305_IETF);
+                = lazySodium.encryptDetached(PASSWORD, null, nPub, key, AEAD.Method.CHACHA20_POLY1305_IETF);
 
-        DetachedDecrypt detachedDecrypt = lazySodium.decryptDetached(detachedEncrypt, null, null, nPub, key, AEAD.Method.CHACHA20_POLY1305_IETF);
+        DetachedDecrypt detachedDecrypt = lazySodium.decryptDetached(detachedEncrypt, null, nPub, key, AEAD.Method.CHACHA20_POLY1305_IETF);
 
         TestCase.assertEquals(detachedDecrypt.getMessageString(), PASSWORD);
     }
@@ -100,9 +100,9 @@ public class AEADAndroidTest extends BaseTest {
         byte[] nPub = lazySodium.nonce(AEAD.XCHACHA20POLY1305_IETF_NPUBBYTES);
 
         DetachedEncrypt detachedEncrypt
-                = lazySodium.encryptDetached(PASSWORD, null, null, nPub, key, AEAD.Method.XCHACHA20_POLY1305_IETF);
+                = lazySodium.encryptDetached(PASSWORD, null, nPub, key, AEAD.Method.XCHACHA20_POLY1305_IETF);
 
-        DetachedDecrypt detachedDecrypt = lazySodium.decryptDetached(detachedEncrypt, null, null, nPub, key, AEAD.Method.XCHACHA20_POLY1305_IETF);
+        DetachedDecrypt detachedDecrypt = lazySodium.decryptDetached(detachedEncrypt, null, nPub, key, AEAD.Method.XCHACHA20_POLY1305_IETF);
 
         TestCase.assertEquals(detachedDecrypt.getMessageString(), PASSWORD);
     }
@@ -129,9 +129,9 @@ public class AEADAndroidTest extends BaseTest {
             byte[] nPub = lazySodium.nonce(AEAD.AES256GCM_NPUBBYTES);
 
             DetachedEncrypt detachedEncrypt
-                    = lazySodium.encryptDetached(PASSWORD, null, null, nPub, key, AEAD.Method.AES256GCM);
+                    = lazySodium.encryptDetached(PASSWORD, null, nPub, key, AEAD.Method.AES256GCM);
 
-            DetachedDecrypt detachedDecrypt = lazySodium.decryptDetached(detachedEncrypt, null, null, nPub, key, AEAD.Method.AES256GCM);
+            DetachedDecrypt detachedDecrypt = lazySodium.decryptDetached(detachedEncrypt, null, nPub, key, AEAD.Method.AES256GCM);
 
             TestCase.assertEquals(detachedDecrypt.getMessageString(), PASSWORD);
         }

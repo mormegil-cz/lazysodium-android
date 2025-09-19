@@ -8,11 +8,12 @@
 
 package com.goterl.lazysodium;
 
+import static org.junit.Assert.assertNotNull;
+
 import com.goterl.lazysodium.exceptions.SodiumException;
 import com.goterl.lazysodium.utils.Key;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class ShortHashAndroidTest extends BaseTest {
 
@@ -22,7 +23,7 @@ public class ShortHashAndroidTest extends BaseTest {
         String hashThis = "This should get hashed";
 
         Key key = lazySodium.cryptoShortHashKeygen();
-        String hash = lazySodium.cryptoShortHash(hashThis, key);
+        String hash = lazySodium.cryptoShortHashStr(hashThis, key);
 
         assertNotNull(hash);
     }

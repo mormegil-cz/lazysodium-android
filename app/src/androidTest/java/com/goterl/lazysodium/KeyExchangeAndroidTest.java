@@ -8,26 +8,28 @@
 
 package com.goterl.lazysodium;
 
+import static org.junit.Assert.assertNotNull;
+
 import com.goterl.lazysodium.exceptions.SodiumException;
 import com.goterl.lazysodium.interfaces.KeyExchange;
 import com.goterl.lazysodium.utils.KeyPair;
 import com.goterl.lazysodium.utils.SessionPair;
-import junit.framework.TestCase;
-import org.junit.Test;
 
-import static org.junit.Assert.assertNotNull;
+import junit.framework.TestCase;
+
+import org.junit.Test;
 
 public class KeyExchangeAndroidTest extends BaseTest {
 
 
     @Test
-    public void generateKeyPair() {
+    public void generateKeyPair() throws SodiumException {
         KeyPair keys = lazySodium.cryptoKxKeypair();
         assertNotNull(keys);
     }
 
     @Test
-    public void generateDeterministicPublicKeyPair() {
+    public void generateDeterministicPublicKeyPair() throws SodiumException {
         byte[] seed = new byte[KeyExchange.SEEDBYTES];
         KeyPair keys = lazySodium.cryptoKxKeypair(seed);
         KeyPair keys2 = lazySodium.cryptoKxKeypair(seed);
@@ -36,7 +38,7 @@ public class KeyExchangeAndroidTest extends BaseTest {
     }
 
     @Test
-    public void generateDeterministicSecretKeyPair() {
+    public void generateDeterministicSecretKeyPair() throws SodiumException {
         byte[] seed = new byte[KeyExchange.SEEDBYTES];
         KeyPair keys = lazySodium.cryptoKxKeypair(seed);
         KeyPair keys2 = lazySodium.cryptoKxKeypair(seed);
@@ -53,8 +55,8 @@ public class KeyExchangeAndroidTest extends BaseTest {
         // Generate the server keypair
         KeyPair serverKeys = lazySodium.cryptoKxKeypair();
 
-        SessionPair clientSession = lazySodium.cryptoKxClientSessionKeys(clientKeys, serverKeys);
-        SessionPair serverSession = lazySodium.cryptoKxServerSessionKeys(serverKeys, clientKeys);
+        SessionPair clientSession = lazySodium.cryptoKxClientSessionKeys(clientKeys, serverKeys.getPublicKey());
+        SessionPair serverSession = lazySodium.cryptoKxServerSessionKeys(serverKeys, clientKeys.getPublicKey());
 
         // You can now use the secret and public keys of the client and the server
         // to encrypt and decrypt messages to one another.

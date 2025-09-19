@@ -76,7 +76,7 @@ public class GenericHashAndroidTest extends BaseTest {
     private String hashMultiPart(int keySize, int hashSize, String... messages) throws SodiumException {
 
         Key key = lazySodium.cryptoGenericHashKeygen(keySize);
-        byte[] state = new byte[lazySodium.cryptoGenericHashStateBytes()];
+        GenericHash.State state = new GenericHash.State();
         lazySodium.cryptoGenericHashInit(state, key, hashSize);
 
         for (String msg : messages) {
