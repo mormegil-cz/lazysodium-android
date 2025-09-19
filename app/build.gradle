@@ -22,11 +22,11 @@ ext {
     javaTestDir = "../lazysodium-java/src/test/java/com/goterl/lazysodium"
 
     jUnitVersion = "4.13.2"
-    androidXJUnitVersion = "1.2.1"
-    androidXEspressoVersion = "3.6.1"
+    androidXJUnitVersion = "1.3.0"
+    androidXEspressoVersion = "3.7.0"
     androidXTestingCoreVersion = "2.2.0"
-    androidXTestCoreVersion = "1.6.1"
-    androidXTestRunnerVersion = "1.6.2"
+    androidXTestCoreVersion = "1.7.0"
+    androidXTestRunnerVersion = "1.7.0"
     kotlinCoroutinesVersion = "1.6.4"
 }
 
@@ -34,10 +34,10 @@ group = project.ext.groupId
 version = project.ext.version
 
 android {
-    compileSdkVersion 35
+    compileSdkVersion 36
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 35
+        minSdkVersion 21
+        targetSdkVersion 36
         multiDexEnabled = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -104,7 +104,7 @@ void loadProps() {
 
 loadProps()
 
-tasks.withType(Test) {
+tasks.withType(Test).configureEach {
     testLogging {
         exceptionFormat = "full"
         events "started", "skipped", "passed", "failed"
@@ -128,7 +128,7 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidXJUnitVersion"
     androidTestImplementation "androidx.test:rules:$androidXTestCoreVersion"
     androidTestImplementation "androidx.test:runner:$androidXTestRunnerVersion"
-    androidTestUtil "androidx.test:orchestrator:1.5.1"
+    androidTestUtil "androidx.test:orchestrator:1.6.1"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidXEspressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$androidXEspressoVersion"
     androidTestImplementation "androidx.arch.core:core-testing:$androidXTestingCoreVersion"
