@@ -7,7 +7,7 @@
  */
 plugins {
     id 'com.android.library'
-    id 'com.vanniktech.maven.publish' version '0.34.0'
+    id 'com.vanniktech.maven.publish' version '0.36.0'
     id 'signing'
 }
 
@@ -27,7 +27,7 @@ ext {
     androidXTestingCoreVersion = "2.2.0"
     androidXTestCoreVersion = "1.7.0"
     androidXTestRunnerVersion = "1.7.0"
-    kotlinCoroutinesVersion = "1.6.4"
+    kotlinCoroutinesVersion = "1.10.2"
 }
 
 group = project.ext.groupId
@@ -114,7 +114,7 @@ tasks.withType(Test).configureEach {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'net.java.dev.jna:jna:5.17.0@aar'
+    implementation 'net.java.dev.jna:jna:5.18.1@aar'
 
     // Test libs
     testImplementation "junit:junit:$jUnitVersion"
