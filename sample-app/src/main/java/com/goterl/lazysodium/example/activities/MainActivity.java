@@ -28,16 +28,13 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             Fragment selectedFragment = null;
-            switch (item.getItemId()) {
-                case R.id.action_item1:
-                    selectedFragment = AboutFragment.newInstance();
-                    break;
-                case R.id.action_item2:
-                    selectedFragment = OperationsFragment.newInstance();
-                    break;
-                case R.id.action_item3:
-                    selectedFragment = CreditsFragment.newInstance();
-                    break;
+            int itemId = item.getItemId();
+            if (itemId == R.id.action_item1) {
+                selectedFragment = AboutFragment.newInstance();
+            } else if (itemId == R.id.action_item2) {
+                selectedFragment = OperationsFragment.newInstance();
+            } else if (itemId == R.id.action_item3) {
+                selectedFragment = CreditsFragment.newInstance();
             }
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.frame_layout, selectedFragment);

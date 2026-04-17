@@ -34,10 +34,9 @@ group = project.ext.groupId
 version = project.ext.version
 
 android {
-    compileSdkVersion 36
+    compileSdkVersion 37
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 36
         multiDexEnabled = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -49,7 +48,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     sourceSets.main {
